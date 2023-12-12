@@ -16,4 +16,5 @@ public class Account {
     private String user_id;
     private String email;
     private int phone;
+    private String password;
 }

@@ -1,4 +1,4 @@
-package com.example.sbpro.controller.request.user;
+package com.example.sbpro.controller.request.account;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -9,4 +9,6 @@ import lombok.Data;
 public class LoginDTO {
     @NotBlank(message="邮件格式错误")
     private String email;
+    @NotBlank(message = "密码不能为空")
+    private String password;
 }
