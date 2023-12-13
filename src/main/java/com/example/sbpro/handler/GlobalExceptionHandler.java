@@ -1,8 +1,10 @@
 package com.example.sbpro.handler;
 
 
+import cn.hutool.jwt.JWTException;
 import com.example.sbpro.controller.response.Result;
 import com.example.sbpro.controller.response.ResultException;
+import com.example.sbpro.service.jwt.JwtInvalidException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -20,9 +22,6 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 
-/**
- * @author john180
- */
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -72,12 +71,17 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(ResultException.class)
-    public Result<String> maaResultExceptionHandler(ResultException e) {
+    public Result<String> ResultExceptionHandler(ResultException e) {
         return Result.fail(e.getCode(), e.getMsg());
     }
 
     @ExceptionHandler(AuthenticationException.class)
     public Result<String> authExceptionHandler(AuthenticationException e) {
+        return Result.fail(401, e.getMessage());
+    }
+
+    @ExceptionHandler({JwtInvalidException.class,JwtInvalidException.class})
+    public Result<String> jwtExceptionHandler(JWTException e) {
         return Result.fail(401, e.getMessage());
     }
 

@@ -10,4 +10,7 @@ import java.time.LocalDateTime;
 public class LoginRsp {
     private String Token;
     private LocalDateTime Exp;
+    private UserInfo userInfo;
 }
+
+

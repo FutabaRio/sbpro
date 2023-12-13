@@ -1,4 +1,4 @@
-package com.example.sbpro.controller.request.account;
+package com.example.sbpro.controller.request.users;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

@@ -16,8 +16,8 @@ public final class JwtAuthToken extends JwtToken implements Authentication {
     private static final String CLAIM_AUTHORITIES = "Authorities";
     private boolean authenticated = false;
 
-    public JwtAuthToken(String token, String requiredType, byte[] key) throws JwtInvalidException {
-        super(token, requiredType, key);
+    public JwtAuthToken(String token, byte[] key) throws JwtInvalidException {
+        super(token, TYPE, key);
     }
 
     public JwtAuthToken(String sub, String jti, LocalDateTime iat, LocalDateTime exp, LocalDateTime nbf, byte[] key) {

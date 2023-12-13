@@ -8,6 +8,7 @@ import lombok.Getter;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 import java.util.TimeZone;
 
 @Getter
@@ -45,9 +46,9 @@ public class JwtToken {
         jwt = JWT.create();
         jwt.setPayload(RegisteredPayload.SUBJECT, sub);
         jwt.setPayload(RegisteredPayload.JWT_ID, jti);
-        jwt.setPayload(RegisteredPayload.ISSUED_AT, iat);
-        jwt.setPayload(RegisteredPayload.EXPIRES_AT, exp);
-        jwt.setPayload(RegisteredPayload.NOT_BEFORE, nbf);
+        jwt.setPayload(RegisteredPayload.ISSUED_AT, iat.toInstant(OffsetDateTime.now().getOffset()).toEpochMilli());
+        jwt.setPayload(RegisteredPayload.EXPIRES_AT, exp.toInstant(OffsetDateTime.now().getOffset()).toEpochMilli());
+        jwt.setPayload(RegisteredPayload.NOT_BEFORE, nbf.toInstant(OffsetDateTime.now().getOffset()).toEpochMilli());
         jwt.setPayload(CLAIM_TYPE, typ);
         jwt.setKey(key);
         payload = jwt.getPayloads();
