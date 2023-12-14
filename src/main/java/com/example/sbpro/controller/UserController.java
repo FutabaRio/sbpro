@@ -35,7 +35,7 @@ public class UserController {
     }
 
     @GetMapping("/userinfo")
-    private Result<UserInfo> userinfo(@Valid String email){
+    private Result<UserInfo> userinfo(@Valid String email) {
         return Result.success("成功", userService.GetUserInfo(email));
     }
 }

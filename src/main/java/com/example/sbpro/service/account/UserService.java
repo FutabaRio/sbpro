@@ -1,5 +1,6 @@
 package com.example.sbpro.service.account;
 
+import com.example.sbpro.common.aop.Limit;
 import com.example.sbpro.controller.request.users.LoginDTO;
 import com.example.sbpro.controller.request.users.RegisterDTO;
 import com.example.sbpro.controller.request.users.UserInfoUpdateDTO;
@@ -28,6 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
+
 
     public LoginRsp Login(LoginDTO loginDTO) {
         var user = userRepository.findByEmail(loginDTO.getEmail());
@@ -58,7 +60,7 @@ public class UserService {
         return userinfo;
     }
 
-
+    @Limit(2)
     public UserInfo GetUserInfo(String email) {
         var user = userRepository.findByEmail(email);
         if (user == null) {

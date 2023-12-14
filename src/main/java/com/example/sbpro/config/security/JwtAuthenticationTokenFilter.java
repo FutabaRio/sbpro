@@ -1,9 +1,7 @@
 package com.example.sbpro.config.security;
 
 import com.example.sbpro.config.external.SbCommonProperties;
-import com.example.sbpro.controller.response.Result;
 import com.example.sbpro.service.jwt.JwtService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -37,12 +35,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         } catch (Exception e) {
 //            fixme: 不应该在这里自定义response的返回,应该在global中自动捕获
             logger.trace(e.getMessage());
-            var rep = Result.fail(401,e.getMessage());
-            String jsonErrorMessage = new ObjectMapper().writeValueAsString(rep);
-            response.getWriter().write(jsonErrorMessage);
-            return;
+        }finally {
+            filterChain.doFilter(request, response);
         }
-        filterChain.doFilter(request, response);
     }
 
     @NotNull
