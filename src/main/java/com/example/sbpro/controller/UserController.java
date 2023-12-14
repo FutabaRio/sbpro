@@ -1,6 +1,5 @@
 package com.example.sbpro.controller;
 
-import com.example.sbpro.config.external.SbCommonProperties;
 import com.example.sbpro.controller.request.users.LoginDTO;
 import com.example.sbpro.controller.request.users.RegisterDTO;
 import com.example.sbpro.controller.response.Result;
@@ -22,10 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Data
 public class UserController {
     private final UserService userService;
-    private final SbCommonProperties sbCommonProperties;
 
     @PostMapping("/login")
-    public Result<LoginRsp> login(@RequestBody LoginDTO loginDTO) {
+    private Result<LoginRsp> login(@RequestBody LoginDTO loginDTO) {
         return Result.success("登录成功", userService.Login(loginDTO));
     }
 
